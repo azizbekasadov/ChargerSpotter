@@ -12,25 +12,9 @@ import CPStorageKit
 internal import CoreData
 
 extension Container {
-    var presistentContainer: Factory<NSPersistentContainer> {
-        self {
-            let container = NSPersistentContainer(name: "DB")
-            container.loadPersistentStores { _, error in
-                if let error = error {
-                    logger.error(.init(stringLiteral: "Unable to load persistent stores: \(error)"))
-                    fatalError(error.localizedDescription)
-                }
-            }
-            container.viewContext.mergePolicy = NSMergePolicy.overwrite
-            return container
-        }
-    }
-    
-    var coreDataStack: Factory<CoreDataStack> {
-        self {
-            return CoreDataStack(
-                persistentContainer: self.presistentContainer.resolve()
-            )
+    var storageService: Factory<StorageService> {
+        self { @MainActor in
+            CPCoreDataStorageService.shared
         }
     }
 }

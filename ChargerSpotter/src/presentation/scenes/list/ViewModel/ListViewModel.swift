@@ -14,14 +14,14 @@ final class ListViewModel: ObservableObject {
     
     private let stationRepository: StationRepository
     
-    private let locationPublisher: Published<CLLocation?>.Publisher
+    private let locationPublisher: AnyPublisher<CLLocation, Never>
     
     var cancellables = Set<AnyCancellable>()
     
     init(
         stationRepository: StationRepository,
         cancellables: Set<AnyCancellable> = Set<AnyCancellable>(),
-        locationPublisher: Published<CLLocation?>.Publisher
+        locationPublisher: AnyPublisher<CLLocation, Never>
     ) {
         self.stationRepository = stationRepository
         self.cancellables = cancellables

@@ -32,8 +32,13 @@ final class MapViewController: BaseViewController {
     }
 
     override func setupBindings() {
-        viewModel.handleLoadState = handleLoadState
-        viewModel.updateOwnLocation = updateOwnLocation(_:)
+        viewModel.handleLoadState = { [weak self] state in
+            self?.handleLoadState(state: state)
+        }
+        
+        viewModel.updateOwnLocation = { [weak self] location in
+            self?.updateOwnLocation(location)
+        }
     }
     
     override func setupUI() {

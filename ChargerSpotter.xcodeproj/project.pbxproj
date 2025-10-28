@@ -121,6 +121,20 @@
 			);
 			target = 5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */;
 		};
+		5DBAF5E82EB1366A006C2F09 /* Exceptions for "CPUIKit" folder in "CPUIKit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				location/LocationManager.swift,
+			);
+			target = 5D9D19142EB0168600580CD8 /* CPUIKit */;
+		};
+		5DBAF5EA2EB13679006C2F09 /* Exceptions for "CPUIKit" folder in "CPUtilsKit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				location/LocationManager.swift,
+			);
+			target = 5D9D18E12EB0100500580CD8 /* CPUtilsKit */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -164,6 +178,10 @@
 		};
 		5D9D19162EB0168600580CD8 /* CPUIKit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5DBAF5EA2EB13679006C2F09 /* Exceptions for "CPUIKit" folder in "CPUtilsKit" target */,
+				5DBAF5E82EB1366A006C2F09 /* Exceptions for "CPUIKit" folder in "CPUIKit" target */,
+			);
 			path = CPUIKit;
 			sourceTree = "<group>";
 		};
@@ -747,6 +765,7 @@
 				INFOPLIST_FILE = ChargerSpotter/resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Charger Spotter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -781,6 +800,7 @@
 				INFOPLIST_FILE = ChargerSpotter/resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Charger Spotter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs access to your location to show it on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

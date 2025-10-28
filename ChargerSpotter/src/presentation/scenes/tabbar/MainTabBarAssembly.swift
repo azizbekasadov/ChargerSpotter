@@ -29,9 +29,7 @@ extension Container {
         self { @MainActor in
             StationRepository(
                 local: StationLocalRepository(
-                    storageService: CPCoreDataStorageService(
-                        coreDataStack: self.coreDataStack.resolve()
-                    )
+                    storageService: self.storageService.resolve()
                 ),
                 remote: StationRemoteRepository()
             )

@@ -13,19 +13,14 @@ import CPUtilsKit
 import CoreLocation
 
 final class MainTabViewModel: NSObject, ObservableObject {
-    
-    @Published var userLocation: CLLocation? = nil
-    @Published var errorMessage: String?
-    
     // MARK: - Private
-    
-    private(set) var container: Container!
     
     private var timer: Timer?
     private var connectionManager: Connectionable?
     
+    private(set) var container: Container!
     private(set) var stationRepository: StationRepository!
-    private let locationManager = CLLocationManager()
+    private(set) var locationManager: LocationManagerPresentable!
 
     convenience init(container: Container) {
         self.init()
@@ -35,9 +30,10 @@ final class MainTabViewModel: NSObject, ObservableObject {
         self.stationRepository = container.stationRepository.resolve()
         // Init
         
-        setupLocationManager()
+        self.locationManager = container.locationManager.resolve()
+        self.connectionManager?.startMonitoring(completion: nil)
         
-        connectionManager?.onConnectionStatusChanged { [weak self] status in
+        self.connectionManager?.onConnectionStatusChanged { [weak self] status in
             logger.info(.init(stringLiteral: "Connectivity status: \(status)"))
             
             switch status {
@@ -55,11 +51,6 @@ final class MainTabViewModel: NSObject, ObservableObject {
         }
     }
 
-    private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-
     private func startTimer() {
         timer = Timer.scheduledTimer(
             withTimeInterval: 20.0,
@@ -69,40 +60,5 @@ final class MainTabViewModel: NSObject, ObservableObject {
         }
 
         RunLoop.current.add(timer!, forMode: .common)
-    }
-}
-
-extension MainTabViewModel: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            manager.startUpdatingLocation()
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .denied:
-            logger.error(.init(stringLiteral: "Error: location Authorization denied."))
-        default:
-            logger.warning(.init(stringLiteral: "Unknown case for CLLocationManager authorizationStatus"))
-        }
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-        guard let location = locations.last else { return }
-
-        logger.info(.init(stringLiteral: "User's location: \(location.coordinate.latitude),\(location.coordinate.longitude)"))
-
-        manager.stopUpdatingLocation()
-        userLocation = location
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
-        errorMessage = error.localizedDescription
-        logger.error(.init(stringLiteral: "Error: \(error.localizedDescription)"))
     }
 }

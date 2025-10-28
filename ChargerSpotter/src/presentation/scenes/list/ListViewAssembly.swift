@@ -31,7 +31,7 @@ extension Container {
         self { @MainActor in
             ListViewModel(
                 stationRepository: self.stationRepository.resolve(),
-                locationPublisher: self.mainTabBarViewModel.resolve().$userLocation
+                locationPublisher: self.locationManager.resolve().locationPublisher
             )
         }
     }

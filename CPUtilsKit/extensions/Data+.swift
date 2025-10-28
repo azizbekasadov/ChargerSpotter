@@ -30,17 +30,18 @@ public extension Data {
     }
 
     private func decodeDate(from string: String) -> Date? {
+        let input = string.replacingOccurrences(of: " ", with: "")
         let iso8601Formatter = ISO8601DateFormatter()
         iso8601Formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         
-        if let date = iso8601Formatter.date(from: string) {
+        if let date = iso8601Formatter.date(from: input) {
             logger.info(.init(stringLiteral: "\(#function) - date: \(date)"))
             return date
         }
 
         iso8601Formatter.formatOptions = [.withInternetDateTime]
         
-        if let date = iso8601Formatter.date(from: string) {
+        if let date = iso8601Formatter.date(from: input) {
             logger.info(.init(stringLiteral: "\(#function) withInternetDateTime - date: \(date)"))
             return date
         }
@@ -48,10 +49,10 @@ public extension Data {
         // fallback for ISO failure
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:sszzz"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 
-        return dateFormatter.date(from: string)
+        return dateFormatter.date(from: input)
     }
 }

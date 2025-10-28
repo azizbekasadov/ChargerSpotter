@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-extension Station {
+extension EVStation {
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
     }

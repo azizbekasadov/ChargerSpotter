@@ -14,7 +14,7 @@ import CoreLocation
 final class MapViewModel: NSObject, ObservableObject {
     private(set) var stationRepository: StationRepository
     
-    private let locationPublisher: Published<CLLocation?>.Publisher
+    private let locationPublisher: AnyPublisher<CLLocation, Never>
     private var cancellables = Set<AnyCancellable>()
     
     var updateOwnLocation: ((CLLocation) -> Void)?
@@ -22,21 +22,21 @@ final class MapViewModel: NSObject, ObservableObject {
     
     init(
         stationRepository: StationRepository,
-        locationPublisher: Published<CLLocation?>.Publisher
+        locationPublisher: AnyPublisher<CLLocation, Never>
     ) {
         self.stationRepository = stationRepository
         self.locationPublisher = locationPublisher
         
         super.init()
         
-        stationRepository.$loadState
+        self.stationRepository.$loadState
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] state in
                 self?.handleLoadState?(state)
             })
             .store(in: &cancellables)
 
-        locationPublisher
+        self.locationPublisher
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] userLocation in

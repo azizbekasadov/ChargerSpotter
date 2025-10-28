@@ -39,7 +39,7 @@ final class MockStationLocalRepository: StationLocalRepositoryPresentable {
     }()
     
     
-    func stations() async -> [ChargerSpotter.Station] {
+    func stations() async -> [ChargerSpotter.EVStation] {
         return []
     }
     
@@ -49,7 +49,7 @@ final class MockStationLocalRepository: StationLocalRepositoryPresentable {
     
     func storeStaticStationData(
         _ evseRootData: ChargerSpotter.EVSERoot
-    ) async -> [ChargerSpotter.Station] {
+    ) async -> [ChargerSpotter.EVStation] {
         return []
     }
     

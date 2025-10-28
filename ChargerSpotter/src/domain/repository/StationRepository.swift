@@ -84,8 +84,7 @@ final class StationRepository {
         }
     }
 
-    // Combine stations to unique ones + set availability states and emit
-    private func updateLoadState(_ stations: [Station], evseStates: [EvseState]) {
+    private func updateLoadState(_ stations: [EVStation], evseStates: [EvseState]) {
         // Preprocess => perfomance
         var evseAvailability: [String: EvseAvailability] = [:]
         
@@ -93,7 +92,7 @@ final class StationRepository {
             evseAvailability[state.evseId, default: .unknown] = state.availability
         }
 
-        var groupedStations: [String: [Station]] = [:]
+        var groupedStations: [String: [EVStation]] = [:]
         
         for station in stations {
             groupedStations[station.stationId!, default: []].append(station)

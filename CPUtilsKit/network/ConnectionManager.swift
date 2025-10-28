@@ -16,7 +16,7 @@ public enum ConnectionStatus {
 // TODO: redo with async/await and continuation syntax
 public protocol Connectionable: AnyObject {
     func startMonitoring(
-        completion: @escaping () -> Void
+        completion: (() -> Void)?
     )
     
     func stopMonitoring()
@@ -85,7 +85,7 @@ extension ConnectionManager: Connectionable {
         [NWPath.Status.satisfied, .requiresConnection].contains(pathStatus)
     }
     
-    public func startMonitoring(completion: @escaping () -> Void) {
+    public func startMonitoring(completion: (() -> Void)? = nil) {
         startCompletion = completion
         pathMonitor.start(queue: .main)
     }
