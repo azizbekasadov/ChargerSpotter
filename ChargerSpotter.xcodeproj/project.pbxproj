@@ -6,6 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5D9D18522EB0053200580CD8 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D9D18512EB0053200580CD8 /* Factory */; };
+		5D9D18552EB0056C00580CD8 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5D9D18542EB0056C00580CD8 /* Logging */; };
+		5D9D18A32EB00B9F00580CD8 /* CPStorageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */; };
+		5D9D18AD2EB00B9F00580CD8 /* CPStorageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */; };
+		5D9D18AE2EB00B9F00580CD8 /* CPStorageKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D9D18EB2EB0100600580CD8 /* CPUtilsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */; };
+		5D9D18F52EB0100600580CD8 /* CPUtilsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */; };
+		5D9D18F62EB0100600580CD8 /* CPUtilsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D9D190F2EB0161400580CD8 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 5D9D190E2EB0161400580CD8 /* Logging */; };
+		5D9D19282EB0168600580CD8 /* CPUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D19152EB0168600580CD8 /* CPUIKit.framework */; };
+		5D9D19292EB0168600580CD8 /* CPUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9D19152EB0168600580CD8 /* CPUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5D9D18182EB0025C00580CD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,19 +35,89 @@
 			remoteGlobalIDString = 5D9D17FD2EB0025B00580CD8;
 			remoteInfo = ChargerSpotter;
 		};
+		5D9D18A42EB00B9F00580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D18992EB00B9F00580CD8;
+			remoteInfo = CPStorageKit;
+		};
+		5D9D18A62EB00B9F00580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D17FD2EB0025B00580CD8;
+			remoteInfo = ChargerSpotter;
+		};
+		5D9D18AB2EB00B9F00580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D18992EB00B9F00580CD8;
+			remoteInfo = CPStorageKit;
+		};
+		5D9D18EC2EB0100600580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D18E12EB0100500580CD8;
+			remoteInfo = CPUtilsKit;
+		};
+		5D9D18EE2EB0100600580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D17FD2EB0025B00580CD8;
+			remoteInfo = ChargerSpotter;
+		};
+		5D9D18F32EB0100600580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D18E12EB0100500580CD8;
+			remoteInfo = CPUtilsKit;
+		};
+		5D9D19262EB0168600580CD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D9D17F62EB0025B00580CD8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9D19142EB0168600580CD8;
+			remoteInfo = CPUIKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5D9D18B22EB00B9F00580CD8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5D9D18F62EB0100600580CD8 /* CPUtilsKit.framework in Embed Frameworks */,
+				5D9D19292EB0168600580CD8 /* CPUIKit.framework in Embed Frameworks */,
+				5D9D18AE2EB00B9F00580CD8 /* CPStorageKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5D9D17FE2EB0025B00580CD8 /* ChargerSpotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargerSpotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9D18172EB0025C00580CD8 /* ChargerSpotterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargerSpotterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9D18212EB0025C00580CD8 /* ChargerSpotterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChargerSpotterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPStorageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D9D18A22EB00B9F00580CD8 /* CPStorageKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPStorageKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPUtilsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D9D18EA2EB0100600580CD8 /* CPUtilsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPUtilsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D9D19152EB0168600580CD8 /* CPUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		5D9D18292EB0025C00580CD8 /* Exceptions for "ChargerSpotter" folder in "ChargerSpotter" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				resources/Info.plist,
 			);
 			target = 5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */;
 		};
@@ -58,6 +142,31 @@
 			path = ChargerSpotterUITests;
 			sourceTree = "<group>";
 		};
+		5D9D189B2EB00B9F00580CD8 /* CPStorageKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CPStorageKit;
+			sourceTree = "<group>";
+		};
+		5D9D18A82EB00B9F00580CD8 /* CPStorageKitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CPStorageKitTests;
+			sourceTree = "<group>";
+		};
+		5D9D18E32EB0100500580CD8 /* CPUtilsKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CPUtilsKit;
+			sourceTree = "<group>";
+		};
+		5D9D18F02EB0100600580CD8 /* CPUtilsKitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CPUtilsKitTests;
+			sourceTree = "<group>";
+		};
+		5D9D19162EB0168600580CD8 /* CPUIKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CPUIKit;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +174,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9D19282EB0168600580CD8 /* CPUIKit.framework in Frameworks */,
+				5D9D18F52EB0100600580CD8 /* CPUtilsKit.framework in Frameworks */,
+				5D9D18552EB0056C00580CD8 /* Logging in Frameworks */,
+				5D9D18522EB0053200580CD8 /* Factory in Frameworks */,
+				5D9D18AD2EB00B9F00580CD8 /* CPStorageKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +196,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5D9D18972EB00B9F00580CD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D189F2EB00B9F00580CD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D9D18A32EB00B9F00580CD8 /* CPStorageKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18DF2EB0100500580CD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D9D190F2EB0161400580CD8 /* Logging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18E72EB0100600580CD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D9D18EB2EB0100600580CD8 /* CPUtilsKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D19122EB0168600580CD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +243,12 @@
 				5D9D18002EB0025B00580CD8 /* ChargerSpotter */,
 				5D9D181A2EB0025C00580CD8 /* ChargerSpotterTests */,
 				5D9D18242EB0025C00580CD8 /* ChargerSpotterUITests */,
+				5D9D189B2EB00B9F00580CD8 /* CPStorageKit */,
+				5D9D18A82EB00B9F00580CD8 /* CPStorageKitTests */,
+				5D9D18E32EB0100500580CD8 /* CPUtilsKit */,
+				5D9D18F02EB0100600580CD8 /* CPUtilsKitTests */,
+				5D9D19162EB0168600580CD8 /* CPUIKit */,
+				5D9D190D2EB0161400580CD8 /* Frameworks */,
 				5D9D17FF2EB0025B00580CD8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,11 +259,47 @@
 				5D9D17FE2EB0025B00580CD8 /* ChargerSpotter.app */,
 				5D9D18172EB0025C00580CD8 /* ChargerSpotterTests.xctest */,
 				5D9D18212EB0025C00580CD8 /* ChargerSpotterUITests.xctest */,
+				5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */,
+				5D9D18A22EB00B9F00580CD8 /* CPStorageKitTests.xctest */,
+				5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */,
+				5D9D18EA2EB0100600580CD8 /* CPUtilsKitTests.xctest */,
+				5D9D19152EB0168600580CD8 /* CPUIKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5D9D190D2EB0161400580CD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5D9D18952EB00B9F00580CD8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18DD2EB0100500580CD8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D19102EB0168600580CD8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */ = {
@@ -115,16 +309,22 @@
 				5D9D17FA2EB0025B00580CD8 /* Sources */,
 				5D9D17FB2EB0025B00580CD8 /* Frameworks */,
 				5D9D17FC2EB0025B00580CD8 /* Resources */,
+				5D9D18B22EB00B9F00580CD8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5D9D18AC2EB00B9F00580CD8 /* PBXTargetDependency */,
+				5D9D18F42EB0100600580CD8 /* PBXTargetDependency */,
+				5D9D19272EB0168600580CD8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				5D9D18002EB0025B00580CD8 /* ChargerSpotter */,
 			);
 			name = ChargerSpotter;
 			packageProductDependencies = (
+				5D9D18512EB0053200580CD8 /* Factory */,
+				5D9D18542EB0056C00580CD8 /* Logging */,
 			);
 			productName = ChargerSpotter;
 			productReference = 5D9D17FE2EB0025B00580CD8 /* ChargerSpotter.app */;
@@ -176,6 +376,124 @@
 			productReference = 5D9D18212EB0025C00580CD8 /* ChargerSpotterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		5D9D18992EB00B9F00580CD8 /* CPStorageKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D9D18AF2EB00B9F00580CD8 /* Build configuration list for PBXNativeTarget "CPStorageKit" */;
+			buildPhases = (
+				5D9D18952EB00B9F00580CD8 /* Headers */,
+				5D9D18962EB00B9F00580CD8 /* Sources */,
+				5D9D18972EB00B9F00580CD8 /* Frameworks */,
+				5D9D18982EB00B9F00580CD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5D9D189B2EB00B9F00580CD8 /* CPStorageKit */,
+			);
+			name = CPStorageKit;
+			packageProductDependencies = (
+			);
+			productName = CPStorageKit;
+			productReference = 5D9D189A2EB00B9F00580CD8 /* CPStorageKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5D9D18A12EB00B9F00580CD8 /* CPStorageKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D9D18B32EB00B9F00580CD8 /* Build configuration list for PBXNativeTarget "CPStorageKitTests" */;
+			buildPhases = (
+				5D9D189E2EB00B9F00580CD8 /* Sources */,
+				5D9D189F2EB00B9F00580CD8 /* Frameworks */,
+				5D9D18A02EB00B9F00580CD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D9D18A52EB00B9F00580CD8 /* PBXTargetDependency */,
+				5D9D18A72EB00B9F00580CD8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5D9D18A82EB00B9F00580CD8 /* CPStorageKitTests */,
+			);
+			name = CPStorageKitTests;
+			packageProductDependencies = (
+			);
+			productName = CPStorageKitTests;
+			productReference = 5D9D18A22EB00B9F00580CD8 /* CPStorageKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5D9D18E12EB0100500580CD8 /* CPUtilsKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D9D18F72EB0100600580CD8 /* Build configuration list for PBXNativeTarget "CPUtilsKit" */;
+			buildPhases = (
+				5D9D18DD2EB0100500580CD8 /* Headers */,
+				5D9D18DE2EB0100500580CD8 /* Sources */,
+				5D9D18DF2EB0100500580CD8 /* Frameworks */,
+				5D9D18E02EB0100500580CD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5D9D18E32EB0100500580CD8 /* CPUtilsKit */,
+			);
+			name = CPUtilsKit;
+			packageProductDependencies = (
+				5D9D190E2EB0161400580CD8 /* Logging */,
+			);
+			productName = CPUtilsKit;
+			productReference = 5D9D18E22EB0100500580CD8 /* CPUtilsKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5D9D18E92EB0100600580CD8 /* CPUtilsKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D9D18FA2EB0100600580CD8 /* Build configuration list for PBXNativeTarget "CPUtilsKitTests" */;
+			buildPhases = (
+				5D9D18E62EB0100600580CD8 /* Sources */,
+				5D9D18E72EB0100600580CD8 /* Frameworks */,
+				5D9D18E82EB0100600580CD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D9D18ED2EB0100600580CD8 /* PBXTargetDependency */,
+				5D9D18EF2EB0100600580CD8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5D9D18F02EB0100600580CD8 /* CPUtilsKitTests */,
+			);
+			name = CPUtilsKitTests;
+			packageProductDependencies = (
+			);
+			productName = CPUtilsKitTests;
+			productReference = 5D9D18EA2EB0100600580CD8 /* CPUtilsKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5D9D19142EB0168600580CD8 /* CPUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D9D192A2EB0168600580CD8 /* Build configuration list for PBXNativeTarget "CPUIKit" */;
+			buildPhases = (
+				5D9D19102EB0168600580CD8 /* Headers */,
+				5D9D19112EB0168600580CD8 /* Sources */,
+				5D9D19122EB0168600580CD8 /* Frameworks */,
+				5D9D19132EB0168600580CD8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5D9D19162EB0168600580CD8 /* CPUIKit */,
+			);
+			name = CPUIKit;
+			packageProductDependencies = (
+			);
+			productName = CPUIKit;
+			productReference = 5D9D19152EB0168600580CD8 /* CPUIKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -191,11 +509,32 @@
 					};
 					5D9D18162EB0025C00580CD8 = {
 						CreatedOnToolsVersion = 26.0.1;
+						LastSwiftMigration = 2600;
 						TestTargetID = 5D9D17FD2EB0025B00580CD8;
 					};
 					5D9D18202EB0025C00580CD8 = {
 						CreatedOnToolsVersion = 26.0.1;
+						LastSwiftMigration = 2600;
 						TestTargetID = 5D9D17FD2EB0025B00580CD8;
+					};
+					5D9D18992EB00B9F00580CD8 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					5D9D18A12EB00B9F00580CD8 = {
+						CreatedOnToolsVersion = 26.0.1;
+						LastSwiftMigration = 2600;
+						TestTargetID = 5D9D17FD2EB0025B00580CD8;
+					};
+					5D9D18E12EB0100500580CD8 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					5D9D18E92EB0100600580CD8 = {
+						CreatedOnToolsVersion = 26.0.1;
+						LastSwiftMigration = 2600;
+						TestTargetID = 5D9D17FD2EB0025B00580CD8;
+					};
+					5D9D19142EB0168600580CD8 = {
+						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
 			};
@@ -208,6 +547,10 @@
 			);
 			mainGroup = 5D9D17F52EB0025B00580CD8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5D9D18502EB0053200580CD8 /* XCRemoteSwiftPackageReference "Factory" */,
+				5D9D18532EB0056C00580CD8 /* XCRemoteSwiftPackageReference "swift-log" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5D9D17FF2EB0025B00580CD8 /* Products */;
 			projectDirPath = "";
@@ -216,6 +559,11 @@
 				5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */,
 				5D9D18162EB0025C00580CD8 /* ChargerSpotterTests */,
 				5D9D18202EB0025C00580CD8 /* ChargerSpotterUITests */,
+				5D9D18992EB00B9F00580CD8 /* CPStorageKit */,
+				5D9D18A12EB00B9F00580CD8 /* CPStorageKitTests */,
+				5D9D18E12EB0100500580CD8 /* CPUtilsKit */,
+				5D9D18E92EB0100600580CD8 /* CPUtilsKitTests */,
+				5D9D19142EB0168600580CD8 /* CPUIKit */,
 			);
 		};
 /* End PBXProject section */
@@ -236,6 +584,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5D9D181F2EB0025C00580CD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18982EB00B9F00580CD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18A02EB00B9F00580CD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18E02EB0100500580CD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18E82EB0100600580CD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D19132EB0168600580CD8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -266,6 +649,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5D9D18962EB00B9F00580CD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D189E2EB00B9F00580CD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18DE2EB0100500580CD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D18E62EB0100600580CD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D9D19112EB0168600580CD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -279,6 +697,41 @@
 			target = 5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */;
 			targetProxy = 5D9D18222EB0025C00580CD8 /* PBXContainerItemProxy */;
 		};
+		5D9D18A52EB00B9F00580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D18992EB00B9F00580CD8 /* CPStorageKit */;
+			targetProxy = 5D9D18A42EB00B9F00580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D18A72EB00B9F00580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */;
+			targetProxy = 5D9D18A62EB00B9F00580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D18AC2EB00B9F00580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D18992EB00B9F00580CD8 /* CPStorageKit */;
+			targetProxy = 5D9D18AB2EB00B9F00580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D18ED2EB0100600580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D18E12EB0100500580CD8 /* CPUtilsKit */;
+			targetProxy = 5D9D18EC2EB0100600580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D18EF2EB0100600580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D17FD2EB0025B00580CD8 /* ChargerSpotter */;
+			targetProxy = 5D9D18EE2EB0100600580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D18F42EB0100600580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D18E12EB0100500580CD8 /* CPUtilsKit */;
+			targetProxy = 5D9D18F32EB0100600580CD8 /* PBXContainerItemProxy */;
+		};
+		5D9D19272EB0168600580CD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9D19142EB0168600580CD8 /* CPUIKit */;
+			targetProxy = 5D9D19262EB0168600580CD8 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -288,20 +741,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChargerSpotter/Info.plist;
+				INFOPLIST_FILE = ChargerSpotter/resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Charger Spotter";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.ChargerSpotter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -320,20 +775,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ChargerSpotter/Info.plist;
+				INFOPLIST_FILE = ChargerSpotter/resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Charger Spotter";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.ChargerSpotter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -471,6 +928,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
@@ -482,6 +940,7 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,6 +952,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
@@ -514,6 +974,29 @@
 		5D9D18332EB0025C00580CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.ChargerSpotterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ChargerSpotter;
+			};
+			name = Debug;
+		};
+		5D9D18342EB0025C00580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
@@ -529,17 +1012,118 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ChargerSpotter;
 			};
-			name = Debug;
+			name = Release;
 		};
-		5D9D18342EB0025C00580CD8 /* Release */ = {
+		5D9D18B02EB00B9F00580CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPStorageKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5D9D18B12EB00B9F00580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPStorageKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5D9D18B42EB00B9F00580CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7FCTC6DRE7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.ChargerSpotterUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPStorageKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargerSpotter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChargerSpotter";
+			};
+			name = Debug;
+		};
+		5D9D18B52EB00B9F00580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPStorageKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -547,7 +1131,202 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ChargerSpotter;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargerSpotter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChargerSpotter";
+			};
+			name = Release;
+		};
+		5D9D18F82EB0100600580CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUtilsKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5D9D18F92EB0100600580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUtilsKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5D9D18FB2EB0100600580CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUtilsKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargerSpotter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChargerSpotter";
+			};
+			name = Debug;
+		};
+		5D9D18FC2EB0100600580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUtilsKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChargerSpotter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChargerSpotter";
+			};
+			name = Release;
+		};
+		5D9D192B2EB0168600580CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5D9D192C2EB0168600580CD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FCTC6DRE7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizbekasadov.CPUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -590,7 +1369,89 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		5D9D18AF2EB00B9F00580CD8 /* Build configuration list for PBXNativeTarget "CPStorageKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D9D18B02EB00B9F00580CD8 /* Debug */,
+				5D9D18B12EB00B9F00580CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D9D18B32EB00B9F00580CD8 /* Build configuration list for PBXNativeTarget "CPStorageKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D9D18B42EB00B9F00580CD8 /* Debug */,
+				5D9D18B52EB00B9F00580CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D9D18F72EB0100600580CD8 /* Build configuration list for PBXNativeTarget "CPUtilsKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D9D18F82EB0100600580CD8 /* Debug */,
+				5D9D18F92EB0100600580CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D9D18FA2EB0100600580CD8 /* Build configuration list for PBXNativeTarget "CPUtilsKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D9D18FB2EB0100600580CD8 /* Debug */,
+				5D9D18FC2EB0100600580CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D9D192A2EB0168600580CD8 /* Build configuration list for PBXNativeTarget "CPUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D9D192B2EB0168600580CD8 /* Debug */,
+				5D9D192C2EB0168600580CD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D9D18502EB0053200580CD8 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+		5D9D18532EB0056C00580CD8 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D9D18512EB0053200580CD8 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D9D18502EB0053200580CD8 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		5D9D18542EB0056C00580CD8 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D9D18532EB0056C00580CD8 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+		5D9D190E2EB0161400580CD8 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D9D18532EB0056C00580CD8 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D9D17F62EB0025B00580CD8 /* Project object */;
 }

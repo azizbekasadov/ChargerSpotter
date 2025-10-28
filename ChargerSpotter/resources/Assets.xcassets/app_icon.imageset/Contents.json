@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "Group 215.jpg",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "Group 216.jpg",
+      "idiom" : "mac"
+    },
+    {
+      "filename" : "Group 217.jpg",
+      "idiom" : "watch"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
