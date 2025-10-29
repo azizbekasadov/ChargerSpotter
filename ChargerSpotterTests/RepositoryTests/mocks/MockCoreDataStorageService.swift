@@ -9,6 +9,8 @@ import Logging
 import CoreData
 import CPStorageKit
 
+@testable import ChargerSpotter
+
 final class MockCoreDataStorageService: StorageService {
     
     // MARK: - Private

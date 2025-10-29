@@ -27,6 +27,18 @@ final class StationRepository {
     private var remote: StationRemoteRepositoryPresentable
     private var local: StationLocalRepositoryPresentable
     
+    var stationsPublisher: AnyPublisher<[UniqueStation], Never> {
+        $loadState
+            .compactMap {
+                if case .loaded(let stations) = $0 {
+                    return stations
+                }
+                
+                return nil
+            }
+            .eraseToAnyPublisher()
+    }
+
     init(
         local: StationLocalRepositoryPresentable,
         remote: StationRemoteRepositoryPresentable
@@ -44,11 +56,10 @@ final class StationRepository {
             
             if cachedStations.isEmpty {
                 do {
-                    let staticData = try await remote.fetchStaticData()
+                    let staticData: EVSERoot = try await remote.fetchStaticData()
                     logger.info(.init(stringLiteral: "Fetching static station data has finished"))
                     
-                    let evseRootData: EVSERoot = try staticData.decoded()
-                    cachedStations = await local.storeStaticStationData(evseRootData)
+                    cachedStations = await local.storeStaticStationData(staticData)
                 } catch {
                     logger.error(.init(stringLiteral: "Failure occured during fetching stations: \(error.localizedDescription)"))
                     loadState = .failed
@@ -59,9 +70,7 @@ final class StationRepository {
             do {
                 let dynamicData = try await remote.fetchDynamicData()
                 logger.info(.init(stringLiteral: "Fetching dynamic station data has finished"))
-                
-                let evseStatusesRoot: EVSEStatusesRoot = try dynamicData.decoded()
-                let evseStates = await local.storeDynamicStationData(evseStatusesRoot)
+                let evseStates = await local.storeDynamicStationData(dynamicData)
                 
                 updateLoadState(cachedStations, evseStates: evseStates)
             } catch {

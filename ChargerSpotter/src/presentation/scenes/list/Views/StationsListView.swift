@@ -24,7 +24,7 @@ struct StationsListView: View {
     @ViewBuilder
     private func StationChipView(_ station: UniqueStation) -> some View {
         VStack(alignment: .leading) {
-            Text(station.stationId)
+            Text(station.stationName ?? "Station " + station.stationId)
                 .font(.body)
                 .fontWeight(.bold)
             

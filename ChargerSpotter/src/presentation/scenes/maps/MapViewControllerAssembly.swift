@@ -12,27 +12,24 @@ import Foundation
 
 final class MapViewControllerAssembly: Assembliable {
     private let container: Container
+    private let stationRepository: StationRepository
     
-    init(container: Container) {
+    init(
+        container: Container,
+        stationRepository: StationRepository
+    ) {
         self.container = container
+        self.stationRepository = stationRepository // we make MainTabViewModel as the main source of truth
     }
     
     func assembly() -> MapViewController {
         let viewController = MapViewController(
-            viewModel: container.mapViewModel.resolve()
+            viewModel: MapViewModel(
+                stationRepository: stationRepository,
+                locationPublisher: container.locationManager.resolve().locationPublisher
+            )
         )
         
         return viewController
-    }
-}
-
-extension Container {
-    var mapViewModel: Factory<MapViewModel> {
-        self { @MainActor in
-            MapViewModel(
-                stationRepository: self.stationRepository.resolve(),
-                locationPublisher: self.locationManager.resolve().locationPublisher
-            )
-        }
     }
 }

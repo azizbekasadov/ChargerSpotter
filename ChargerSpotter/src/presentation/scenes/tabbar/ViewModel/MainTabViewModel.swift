@@ -24,20 +24,14 @@ final class MainTabViewModel: NSObject, ObservableObject {
     private(set) var stationRepository: StationRepository!
     private(set) var locationManager: LocationManagerPresentable!
 
-    private(set) lazy var lookupViewControllers: [TabBarType: (any Assembliable)] = [
-        TabBarType.map: MapViewControllerAssembly(container: self.container),
-        TabBarType.list: ListViewAssembly(container: self.container)
-    ]
-    
     convenience init(container: Container) {
         self.init()
         
         self.container = container
         self.connectionManager = container.connectionManager.resolve()
         self.stationRepository = container.stationRepository.resolve()
-        // Init
-        
         self.locationManager = container.locationManager.resolve()
+        
         self.connectionManager?.startMonitoring(completion: nil)
         
         self.connectionManager?.onConnectionStatusChanged { [weak self] status in
@@ -59,14 +53,29 @@ final class MainTabViewModel: NSObject, ObservableObject {
     }
     
     func assembleViewControllers() -> [UIViewController] {
-        return lookupViewControllers.compactMap {
-            (($0.value).assembly() as? UIViewController)?
-                .withNavigationContainer()
-                .tabBarItem(TabBarItem(type: $0.key))
-        }
+        return [
+            MapViewControllerAssembly(
+                container: self.container,
+                stationRepository: self.stationRepository
+            )
+            .assembly()
+            .withNavigationContainer()
+            .tabBarItem(TabBarItem(type: .map)),
+            
+            ListViewAssembly(
+                container: self.container,
+                stationRepository: self.stationRepository
+            )
+            .assembly()
+            .withNavigationContainer()
+            .tabBarItem(TabBarItem(type: .list))
+        ]
     }
 
     private func startTimer() {
+        stationRepository.fetchStations()
+        timer?.invalidate()
+        
         timer = Timer.scheduledTimer(
             withTimeInterval: 20.0,
             repeats: true

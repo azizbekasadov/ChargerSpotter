@@ -12,27 +12,25 @@ import Foundation
 
 final class ListViewAssembly: Assembliable {
     private let container: Container
+    private let stationRepository: StationRepository
     
-    init(container: Container) {
+    init(
+        container: Container,
+        stationRepository: StationRepository
+    ) {
         self.container = container
+        self.stationRepository = stationRepository
     }
     
     func assembly() -> ListViewController {
         let viewController = ListViewController(
-            viewModel: container.listViewModel.resolve()
+            viewModel:
+                ListViewModel(
+                    stationRepository: stationRepository,
+                    locationPublisher: container.locationManager.resolve().locationPublisher
+                )
         )
         
         return viewController
-    }
-}
-
-extension Container {
-    var listViewModel: Factory<ListViewModel> {
-        self { @MainActor in
-            ListViewModel(
-                stationRepository: self.stationRepository.resolve(),
-                locationPublisher: self.locationManager.resolve().locationPublisher
-            )
-        }
     }
 }

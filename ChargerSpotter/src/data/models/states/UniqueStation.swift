@@ -9,9 +9,11 @@ import Foundation
 import MapKit
 
 class UniqueStation: NSObject {
+    dynamic var coordinate: CLLocationCoordinate2D
+    
+    let stationName: String?
     let stationId: String
     let maxPower: Int
-    let coordinate: CLLocationCoordinate2D
     let lastUpdate: Date?
     let availability: EvseAvailability
 
@@ -27,12 +29,14 @@ class UniqueStation: NSObject {
 
     init(
         stationId: String,
+        stationName: String?,
         maxPower: Int,
         coordinate: CLLocationCoordinate2D,
         lastUpdate: Date?,
         availability: EvseAvailability
     ) {
         self.stationId = stationId
+        self.stationName = stationName
         self.maxPower = maxPower
         self.coordinate = coordinate
         self.lastUpdate = lastUpdate
@@ -106,6 +110,7 @@ extension Dictionary where Key == String, Value == [EVStation] {
 
             return UniqueStation(
                 stationId: stationId,
+                stationName: evseItems[0].name,
                 maxPower: maxPower,
                 coordinate: evseItems[0].location.coordinate,
                 lastUpdate: evseItems[0].lastUpdate,

@@ -31,7 +31,11 @@ extension Container {
                 local: StationLocalRepository(
                     storageService: self.storageService.resolve()
                 ),
-                remote: StationRemoteRepository()
+                remote: StationRemoteRepository(
+                    networkClientAPI: EVStationNetworkService(
+                        networkService: self.networkService.resolve()
+                    )
+                )
             )
         }
     }

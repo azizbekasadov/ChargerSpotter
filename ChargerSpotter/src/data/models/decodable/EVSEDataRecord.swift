@@ -14,6 +14,7 @@ struct EVSEDataRecord: Decodable {
     let lastUpdate: Date?
     let coordinates: CLLocationCoordinate2D?
     let facilities: [ChargingFacility]
+    let stationNames: [ChargingStationNames]?
 
     enum CodingKeys: String, CodingKey {
         case stationId = "ChargingStationId"
@@ -21,6 +22,7 @@ struct EVSEDataRecord: Decodable {
         case lastUpdate
         case coordinates = "GeoCoordinates"
         case facilities = "ChargingFacilities"
+        case stationNames = "ChargingStationNames"
     }
 
     init(from decoder: Decoder) throws {
@@ -28,10 +30,8 @@ struct EVSEDataRecord: Decodable {
         stationId = try container.decode(String.self, forKey: .stationId)
         evseId = try container.decode(String.self, forKey: .evseId)
         lastUpdate = try container.decodeIfPresent(Date.self, forKey: .lastUpdate)
-
-        let gc = try container.decode(GeoCoordinates.self, forKey: .coordinates)
-        coordinates = gc.locationCoordinate2D
-
+        coordinates = try container.decode(GeoCoordinates.self, forKey: .coordinates).locationCoordinate2D
         facilities = try container.decode([ChargingFacility].self, forKey: .facilities)
+        stationNames = try container.decodeIfPresent([ChargingStationNames].self, forKey: .stationNames)
     }
 }

@@ -42,6 +42,9 @@ final class MapViewController: BaseViewController {
     }
     
     override func setupUI() {
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "StationCluster")
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "StationAnnotation")
+        
         view.addSubview(mapView)
 
         NSLayoutConstraint.activate([
@@ -86,29 +89,59 @@ extension MapViewController: MKMapViewDelegate {
         _ mapView: MKMapView,
         viewFor annotation: MKAnnotation
     ) -> MKAnnotationView? {
-        guard let station = annotation as? UniqueStation else { return nil }
-
-        let identifier = "StationAnnotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(
-            withIdentifier: identifier
-        ) as? MKMarkerAnnotationView
-
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(
-                annotation: station,
-                reuseIdentifier: identifier
-            )
-            annotationView?.canShowCallout = true
-
-            let infoButton = UIButton(type: .detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = infoButton
-        } else {
-            annotationView?.annotation = station
+        if annotation is MKUserLocation { return nil }
+        
+        // Clustering
+        if let cluster = annotation as? MKClusterAnnotation {
+            let id = "StationCluster"
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: id, for: cluster) as! MKMarkerAnnotationView
+            
+            view.canShowCallout = true
+            view.animatesWhenAdded = true
+            view.subtitleVisibility = .adaptive
+            view.clusteringIdentifier = nil
+            view.displayPriority = .defaultHigh
+            
+            let count = cluster.memberAnnotations.count
+            view.glyphText = "\(count)"
+            view.markerTintColor = dominantTintColor(for: cluster)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return view
         }
-
-        annotationView?.glyphImage = UIImage(systemName: "ev.charger")
-        annotationView?.markerTintColor = station.availability.tintColor
-
-        return annotationView
+        
+        guard let station = annotation as? UniqueStation else { return nil }
+        
+        let id = "StationAnnotation"
+        let view = (mapView.dequeueReusableAnnotationView(withIdentifier: id) as? MKMarkerAnnotationView)
+        ?? MKMarkerAnnotationView(annotation: station, reuseIdentifier: id)
+        
+        view.annotation = station
+        view.canShowCallout = true
+        view.glyphImage = UIImage(systemName: "ev.charger")
+        view.markerTintColor = station.availability.tintColor
+        
+        view.clusteringIdentifier = "station"
+        view.displayPriority = .defaultLow
+        
+        if view.rightCalloutAccessoryView == nil {
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        return view
+    }
+    
+    private func dominantTintColor(for cluster: MKClusterAnnotation) -> UIColor {
+        var histogram: [UIColor:Int] = [:] // dynamic lookup
+        
+        for case let s as UniqueStation in cluster.memberAnnotations {
+            let c = s.availability.tintColor
+            histogram[c, default: 0] += 1
+        }
+        
+        if let (color, _) = histogram.max(by: { $0.value < $1.value }) {
+            return color
+        }
+        
+        return .systemGray
     }
 }

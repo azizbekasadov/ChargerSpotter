@@ -108,6 +108,7 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
             
             let station = EVStation(context: context)
             station.stationId = $0.stationId
+            station.name = $0.stationNames?.first?.value
             station.evseId = $0.evseId
             station.lastUpdate = $0.lastUpdate
             station.latitude = $0.coordinates?.latitude ?? 0

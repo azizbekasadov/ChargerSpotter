@@ -8,21 +8,22 @@
 import Foundation
 
 protocol StationRemoteRepositoryPresentable {
-    func fetchStaticData() async throws -> Data
-    func fetchDynamicData() async throws -> Data
+    func fetchStaticData() async throws -> EVSERoot
+    func fetchDynamicData() async throws -> EVSEStatusesRoot
 }
 
 final class StationRemoteRepository: StationRemoteRepositoryPresentable {
-    func fetchStaticData() async throws -> Data {
-        let (data, _) = try await URLSession.shared.data(
-            from: AppConfig.API.staticDataURL,
-            delegate: nil
-        )
-        return data
+    private let networkClientAPI: EVStationNetworkServiceProviding
+    
+    init(networkClientAPI: EVStationNetworkServiceProviding) {
+        self.networkClientAPI = networkClientAPI
+    }
+    
+    func fetchStaticData() async throws -> EVSERoot {
+        try await networkClientAPI.fetchStaticData()
     }
 
-    func fetchDynamicData() async throws -> Data {
-        let (data, _) = try await URLSession.shared.data(from: AppConfig.API.dynamicDataURL, delegate: nil)
-        return data
+    func fetchDynamicData() async throws -> EVSEStatusesRoot {
+        try await networkClientAPI.fetchDynamicData()
     }
 }

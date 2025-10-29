@@ -35,6 +35,10 @@ public final class CoreDataStack: NSObject, CoreDataStackPresentable {
     
     public lazy var context = container.viewContext
     
+    public override init() {
+        super.init()
+    }
+    
     public func save() {
         guard context.hasChanges else { return }
         
