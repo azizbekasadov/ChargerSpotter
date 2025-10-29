@@ -5,6 +5,7 @@
 //  Created by Azizbek Asadov on 28.10.2025.
 //
 
+import Combine
 import Factory
 import CPUIKit
 import CPUtilsKit
@@ -25,7 +26,7 @@ final class MapViewControllerAssembly: Assembliable {
     func assembly() -> MapViewController {
         let viewController = MapViewController(
             viewModel: MapViewModel(
-                stationRepository: stationRepository,
+                stationsStateLoader: stationRepository.$loadState,
                 locationPublisher: container.locationManager.resolve().locationPublisher
             )
         )

@@ -5,7 +5,6 @@
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="stationId" attributeType="String"/>
         <relationship name="power" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Power" inverseName="station" inverseEntity="Power"/>
     </entity>

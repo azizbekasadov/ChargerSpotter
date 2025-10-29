@@ -11,20 +11,15 @@ import CoreLocation
 
 internal import CoreData
 
+@MainActor
 protocol StationLocalRepositoryPresentable {
-    @MainActor
     func stations() async -> [EVStation]
-    
-    @MainActor
     func evseStates() async -> [EvseState]
-    
-    @MainActor
     func storeStaticStationData(_ evseRootData: EVSERoot) async -> [EVStation]
-    
-    @MainActor
     func storeDynamicStationData(_ evseStatusesRoot: EVSEStatusesRoot) async -> [EvseState]
 }
 
+@MainActor
 final class StationLocalRepository: StationLocalRepositoryPresentable {
     private let storageService: StorageService
     
@@ -33,7 +28,6 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
     }
     
     // Load cached stations
-    @MainActor
     func stations() async -> [EVStation] {
         let fetchConfiguration = FetchConfiguration(
             relationshipKeyPathsForPrefetching: ["power"]
@@ -46,7 +40,6 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
     }
     
     // Load cached availabilities
-    @MainActor
     func evseStates() async -> [EvseState] {
         storageService.fetch(
             type: State.self
@@ -60,7 +53,6 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
         } ?? []
     }
     
-    @MainActor
     func storeStaticStationData(_ evseRootData: EVSERoot) async -> [EVStation] {
         let staticStations = await mapEVSEData(evseRootData)
         storageService.write()
@@ -68,7 +60,6 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
         return staticStations
     }
     
-    @MainActor
     func storeDynamicStationData(_ evseStatusesRoot: EVSEStatusesRoot) async -> [EvseState] {
         let evseStates = evseStatusesRoot.statuses
             .flatMap { $0.statusRecords }
@@ -108,7 +99,6 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
             
             let station = EVStation(context: context)
             station.stationId = $0.stationId
-            station.name = $0.stationNames?.first?.value
             station.evseId = $0.evseId
             station.lastUpdate = $0.lastUpdate
             station.latitude = $0.coordinates?.latitude ?? 0

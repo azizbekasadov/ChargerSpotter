@@ -77,7 +77,7 @@ final class MainTabViewModel: NSObject, ObservableObject {
         timer?.invalidate()
         
         timer = Timer.scheduledTimer(
-            withTimeInterval: 20.0,
+            withTimeInterval: 180,
             repeats: true
         ) { [weak self] _ in
             self?.stationRepository.fetchStations()

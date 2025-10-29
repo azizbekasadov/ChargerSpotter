@@ -19,7 +19,7 @@ final class StationRepository {
         case `default`
         case loading
         case failed
-        case loaded([UniqueStation])
+        case loaded([UniqueStation], Date)
     }
 
     @Published private(set) var loadState: LoadState = .default
@@ -27,11 +27,11 @@ final class StationRepository {
     private var remote: StationRemoteRepositoryPresentable
     private var local: StationLocalRepositoryPresentable
     
-    var stationsPublisher: AnyPublisher<[UniqueStation], Never> {
+    var stationsPublisher: AnyPublisher<([UniqueStation], Date), Never> {
         $loadState
             .compactMap {
-                if case .loaded(let stations) = $0 {
-                    return stations
+                if case let .loaded(stations, date) = $0 {
+                    return (stations, Date())
                 }
                 
                 return nil
@@ -112,6 +112,6 @@ final class StationRepository {
             for: evseAvailability
         )
 
-        loadState = .loaded(uniqueStations)
+        loadState = .loaded(uniqueStations, Date())
     }
 }

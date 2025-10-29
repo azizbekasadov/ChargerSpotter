@@ -26,7 +26,7 @@ final class ListViewAssembly: Assembliable {
         let viewController = ListViewController(
             viewModel:
                 ListViewModel(
-                    stationRepository: stationRepository,
+                    stationsStateLoader: stationRepository.$loadState,
                     locationPublisher: container.locationManager.resolve().locationPublisher
                 )
         )

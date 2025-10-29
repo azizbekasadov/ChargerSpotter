@@ -12,8 +12,7 @@ import CPUtilsKit
 import CoreLocation
 
 final class MapViewModel: NSObject, ObservableObject {
-    private(set) var stationRepository: StationRepository
-    
+    private let stationsStateLoader: Published<StationRepository.LoadState>.Publisher
     private let locationPublisher: AnyPublisher<CLLocation, Never>
     private var cancellables = Set<AnyCancellable>()
     
@@ -21,15 +20,15 @@ final class MapViewModel: NSObject, ObservableObject {
     var handleLoadState: ((StationRepository.LoadState) -> Void)?
     
     init(
-        stationRepository: StationRepository,
+        stationsStateLoader: Published<StationRepository.LoadState>.Publisher,
         locationPublisher: AnyPublisher<CLLocation, Never>
     ) {
-        self.stationRepository = stationRepository
+        self.stationsStateLoader = stationsStateLoader
         self.locationPublisher = locationPublisher
         
         super.init()
         
-        self.stationRepository.$loadState
+        self.stationsStateLoader
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] state in
                 self?.handleLoadState?(state)

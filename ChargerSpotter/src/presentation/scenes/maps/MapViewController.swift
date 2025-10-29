@@ -19,6 +19,13 @@ final class MapViewController: BaseViewController {
         return mapView
     }()
 
+    private lazy var updateDateLabel: SyncDateLabel = {
+        let label = SyncDateLabel()
+        label.alpha = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let viewModel: MapViewModel
     
     init(viewModel: MapViewModel) {
@@ -46,12 +53,25 @@ final class MapViewController: BaseViewController {
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "StationAnnotation")
         
         view.addSubview(mapView)
+        view.addSubview(updateDateLabel)
 
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        ])
+        view.bringSubviewToFront(updateDateLabel)
+        
+        NSLayoutConstraint.activate(
+            [
+                mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                
+                updateDateLabel.bottomAnchor.constraint(
+                    equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
+                    constant: -24
+                ),
+                updateDateLabel.centerXAnchor.constraint(
+                    equalTo: self.view.centerXAnchor
+                ),
+            ]
+        )
         
         if #available(iOS 26, *) {
             mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -62,13 +82,33 @@ final class MapViewController: BaseViewController {
 
     private func handleLoadState(state: StationRepository.LoadState) {
         switch state {
-        case .loaded(let stations):
+        case let .loaded(stations, lastSyncDate):
             logger.info(.init(stringLiteral: "Number of stations: \(stations.count)"))
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(stations)
+            
+            updateDateLabel.text = lastSyncDate.formatted(
+                .dateTime
+                .weekday(.wide)
+                .day(.twoDigits)
+                .hour()
+                .minute()
+                .second()
+            )
+            
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 1
+            }
         case .failed:
             logger.error(.init(stringLiteral: "Failed to load static data"))
-        default: break
+            
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 0
+            }
+        default:
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 0
+            }
         }
     }
 
