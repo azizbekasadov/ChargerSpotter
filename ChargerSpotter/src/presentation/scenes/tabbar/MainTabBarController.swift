@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CPUIKit
 
 final class MainTabBarController: UITabBarController {
     private let viewModel: MainTabViewModel
@@ -22,33 +23,6 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers = [
-            MapViewControllerAssembly(
-                container: self.viewModel.container
-            )
-            .assembly()
-            .withNavigationContainer()
-            .tabBarItem(
-                TabBarItem(
-                    tag: 0,
-                    title: "Maps",
-                    imageName: "map",
-                    selectedImageName: "map.fill"
-                )
-            ),
-            ListViewAssembly(
-                container: self.viewModel.container
-            )
-            .assembly()
-            .withNavigationContainer()
-            .tabBarItem(
-                TabBarItem(
-                    tag: 1,
-                    title: "Stations",
-                    imageName: "list.bullet.rectangle.portrait",
-                    selectedImageName: "list.bullet.rectangle.portrait.fill"
-                )
-            ),
-        ]
+        viewControllers = viewModel.assembleViewControllers()
     }
 }

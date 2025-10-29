@@ -5,9 +5,11 @@
 //  Created by Azizbek Asadov on 27.10.2025.
 //
 
+import UIKit
 import Combine
 import Network
 import Factory
+import CPUIKit
 import Foundation
 import CPUtilsKit
 import CoreLocation
@@ -22,6 +24,11 @@ final class MainTabViewModel: NSObject, ObservableObject {
     private(set) var stationRepository: StationRepository!
     private(set) var locationManager: LocationManagerPresentable!
 
+    private(set) lazy var lookupViewControllers: [TabBarType: (any Assembliable)] = [
+        TabBarType.map: MapViewControllerAssembly(container: self.container),
+        TabBarType.list: ListViewAssembly(container: self.container)
+    ]
+    
     convenience init(container: Container) {
         self.init()
         
@@ -48,6 +55,14 @@ final class MainTabViewModel: NSObject, ObservableObject {
             @unknown default:
                 logger.warning(.init(stringLiteral: "Connectivity status: \(status).\nUnable to fetch stations. Use fallback case"))
             }
+        }
+    }
+    
+    func assembleViewControllers() -> [UIViewController] {
+        return lookupViewControllers.compactMap {
+            (($0.value).assembly() as? UIViewController)?
+                .withNavigationContainer()
+                .tabBarItem(TabBarItem(type: $0.key))
         }
     }
 
