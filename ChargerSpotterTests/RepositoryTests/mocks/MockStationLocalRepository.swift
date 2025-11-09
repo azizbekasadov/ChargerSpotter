@@ -17,7 +17,7 @@ final class MockStationLocalRepository: StationLocalRepositoryPresentable {
         let container = NSPersistentContainer(name: "DB")
         container.loadPersistentStores { _, error in
             if let error = error {
-                logger.error(.init(stringLiteral: "Unable to load persistent stores: \(error)"))
+                testLogger.error(.init(stringLiteral: "Unable to load persistent stores: \(error)"))
                 fatalError(error.localizedDescription)
             }
         }
@@ -31,15 +31,12 @@ final class MockStationLocalRepository: StationLocalRepositoryPresentable {
     }()
 
     private lazy var coreDataStack: CoreDataStack = {
-        let stack = CoreDataStack(
-            persistentContainer: self.container
-        )
-        
+        let stack = CoreDataStack()
         return stack
     }()
     
     
-    func stations() async -> [ChargerSpotter.Station] {
+    func stations() async -> [ChargerSpotter.EVStation] {
         return []
     }
     
@@ -49,7 +46,7 @@ final class MockStationLocalRepository: StationLocalRepositoryPresentable {
     
     func storeStaticStationData(
         _ evseRootData: ChargerSpotter.EVSERoot
-    ) async -> [ChargerSpotter.Station] {
+    ) async -> [ChargerSpotter.EVStation] {
         return []
     }
     

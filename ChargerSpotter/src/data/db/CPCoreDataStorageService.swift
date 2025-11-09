@@ -10,10 +10,14 @@ import CPStorageKit
 internal import CoreData
 
 final class CPCoreDataStorageService: StorageService {
+
+    static let shared: StorageService = CPCoreDataStorageService(
+        coreDataStack: CoreDataStack.shared
+    )
     
     // MARK: - Private
     
-    private let coreDataStack: CoreDataStack
+    private let coreDataStack: CoreDataStackPresentable
 
     private func createRequest<T: Storagable>(withResultType type: T.Type) throws -> NSFetchRequest<T> {
         if let name = T.entity().name {
@@ -46,7 +50,7 @@ final class CPCoreDataStorageService: StorageService {
         return coreDataStack.context
     }
     
-    init(coreDataStack: CoreDataStack) {
+    init(coreDataStack: CoreDataStackPresentable) {
         self.coreDataStack = coreDataStack
     }
 

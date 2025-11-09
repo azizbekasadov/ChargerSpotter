@@ -5,6 +5,7 @@
 //  Created by Azizbek Asadov on 28.10.2025.
 //
 
+import UIKit
 import Combine
 import Network
 import Foundation
@@ -12,31 +13,33 @@ import CPUtilsKit
 import CoreLocation
 
 final class MapViewModel: NSObject, ObservableObject {
-    private(set) var stationRepository: StationRepository
     
-    private let locationPublisher: Published<CLLocation?>.Publisher
+    private let stationsStateLoader: Published<StationRepository.LoadState>.Publisher
+    private let locationPublisher: AnyPublisher<CLLocation, Never>
     private var cancellables = Set<AnyCancellable>()
     
     var updateOwnLocation: ((CLLocation) -> Void)?
     var handleLoadState: ((StationRepository.LoadState) -> Void)?
     
     init(
-        stationRepository: StationRepository,
-        locationPublisher: Published<CLLocation?>.Publisher
+        stationsStateLoader: Published<StationRepository.LoadState>.Publisher,
+        locationPublisher: AnyPublisher<CLLocation, Never>
     ) {
-        self.stationRepository = stationRepository
+        self.stationsStateLoader = stationsStateLoader
         self.locationPublisher = locationPublisher
         
         super.init()
         
-        stationRepository.$loadState
+        self.stationsStateLoader
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] state in
                 self?.handleLoadState?(state)
             })
             .store(in: &cancellables)
 
-        locationPublisher
+        self.locationPublisher
+            .removeDuplicates()
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] userLocation in
@@ -44,6 +47,4 @@ final class MapViewModel: NSObject, ObservableObject {
             })
             .store(in: &cancellables)
     }
-    
-    
 }

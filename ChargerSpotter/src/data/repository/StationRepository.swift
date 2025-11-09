@@ -19,7 +19,7 @@ final class StationRepository {
         case `default`
         case loading
         case failed
-        case loaded([UniqueStation])
+        case loaded([UniqueStation], Date)
     }
 
     @Published private(set) var loadState: LoadState = .default
@@ -27,6 +27,18 @@ final class StationRepository {
     private var remote: StationRemoteRepositoryPresentable
     private var local: StationLocalRepositoryPresentable
     
+    var stationsPublisher: AnyPublisher<([UniqueStation], Date), Never> {
+        $loadState
+            .compactMap {
+                if case let .loaded(stations, date) = $0 {
+                    return (stations, date)
+                }
+                
+                return nil
+            }
+            .eraseToAnyPublisher()
+    }
+
     init(
         local: StationLocalRepositoryPresentable,
         remote: StationRemoteRepositoryPresentable
@@ -44,11 +56,10 @@ final class StationRepository {
             
             if cachedStations.isEmpty {
                 do {
-                    let staticData = try await remote.fetchStaticData()
+                    let staticData: EVSERoot = try await remote.fetchStaticData()
                     logger.info(.init(stringLiteral: "Fetching static station data has finished"))
                     
-                    let evseRootData: EVSERoot = try staticData.decoded()
-                    cachedStations = await local.storeStaticStationData(evseRootData)
+                    cachedStations = await local.storeStaticStationData(staticData)
                 } catch {
                     logger.error(.init(stringLiteral: "Failure occured during fetching stations: \(error.localizedDescription)"))
                     loadState = .failed
@@ -59,9 +70,7 @@ final class StationRepository {
             do {
                 let dynamicData = try await remote.fetchDynamicData()
                 logger.info(.init(stringLiteral: "Fetching dynamic station data has finished"))
-                
-                let evseStatusesRoot: EVSEStatusesRoot = try dynamicData.decoded()
-                let evseStates = await local.storeDynamicStationData(evseStatusesRoot)
+                let evseStates = await local.storeDynamicStationData(dynamicData)
                 
                 updateLoadState(cachedStations, evseStates: evseStates)
             } catch {
@@ -84,8 +93,7 @@ final class StationRepository {
         }
     }
 
-    // Combine stations to unique ones + set availability states and emit
-    private func updateLoadState(_ stations: [Station], evseStates: [EvseState]) {
+    private func updateLoadState(_ stations: [EVStation], evseStates: [EvseState]) {
         // Preprocess => perfomance
         var evseAvailability: [String: EvseAvailability] = [:]
         
@@ -93,7 +101,7 @@ final class StationRepository {
             evseAvailability[state.evseId, default: .unknown] = state.availability
         }
 
-        var groupedStations: [String: [Station]] = [:]
+        var groupedStations: [String: [EVStation]] = [:]
         
         for station in stations {
             groupedStations[station.stationId!, default: []].append(station)
@@ -104,6 +112,6 @@ final class StationRepository {
             for: evseAvailability
         )
 
-        loadState = .loaded(uniqueStations)
+        loadState = .loaded(uniqueStations, Date())
     }
 }

@@ -11,20 +11,15 @@ import CoreLocation
 
 internal import CoreData
 
+@MainActor
 protocol StationLocalRepositoryPresentable {
-    @MainActor
-    func stations() async -> [Station]
-    
-    @MainActor
+    func stations() async -> [EVStation]
     func evseStates() async -> [EvseState]
-    
-    @MainActor
-    func storeStaticStationData(_ evseRootData: EVSERoot) async -> [Station]
-    
-    @MainActor
+    func storeStaticStationData(_ evseRootData: EVSERoot) async -> [EVStation]
     func storeDynamicStationData(_ evseStatusesRoot: EVSEStatusesRoot) async -> [EvseState]
 }
 
+@MainActor
 final class StationLocalRepository: StationLocalRepositoryPresentable {
     private let storageService: StorageService
     
@@ -33,20 +28,18 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
     }
     
     // Load cached stations
-    @MainActor
-    func stations() async -> [Station] {
+    func stations() async -> [EVStation] {
         let fetchConfiguration = FetchConfiguration(
             relationshipKeyPathsForPrefetching: ["power"]
         )
         
         return storageService.fetch(
-            type: Station.self,
+            type: EVStation.self,
             configuration: fetchConfiguration
         ) ?? []
     }
     
     // Load cached availabilities
-    @MainActor
     func evseStates() async -> [EvseState] {
         storageService.fetch(
             type: State.self
@@ -60,15 +53,13 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
         } ?? []
     }
     
-    @MainActor
-    func storeStaticStationData(_ evseRootData: EVSERoot) async -> [Station] {
+    func storeStaticStationData(_ evseRootData: EVSERoot) async -> [EVStation] {
         let staticStations = await mapEVSEData(evseRootData)
         storageService.write()
         
         return staticStations
     }
     
-    @MainActor
     func storeDynamicStationData(_ evseStatusesRoot: EVSEStatusesRoot) async -> [EvseState] {
         let evseStates = evseStatusesRoot.statuses
             .flatMap { $0.statusRecords }
@@ -94,7 +85,7 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
         return evseStates
     }
     
-    private func mapEVSEData(_ root: EVSERoot) async -> [Station] {
+    private func mapEVSEData(_ root: EVSERoot) async -> [EVStation] {
         let dataRecords = root.evseData.flatMap {
             $0.dataRecords
         }
@@ -104,7 +95,9 @@ final class StationLocalRepository: StationLocalRepositoryPresentable {
                 fatalError("Unnable to acquire managed context")
             }
             
-            let station = Station(context: context)
+            context.automaticallyMergesChangesFromParent = true
+            
+            let station = EVStation(context: context)
             station.stationId = $0.stationId
             station.evseId = $0.evseId
             station.lastUpdate = $0.lastUpdate

@@ -5,27 +5,24 @@
 //  Created by Azizbek Asadov on 27.10.2025.
 //
 
+import UIKit
 import Combine
 import Network
 import Factory
+import CPUIKit
 import Foundation
 import CPUtilsKit
 import CoreLocation
 
 final class MainTabViewModel: NSObject, ObservableObject {
-    
-    @Published var userLocation: CLLocation? = nil
-    @Published var errorMessage: String?
-    
     // MARK: - Private
-    
-    private(set) var container: Container!
     
     private var timer: Timer?
     private var connectionManager: Connectionable?
     
+    private(set) var container: Container!
     private(set) var stationRepository: StationRepository!
-    private let locationManager = CLLocationManager()
+    private(set) var locationManager: LocationManagerPresentable!
 
     convenience init(container: Container) {
         self.init()
@@ -33,11 +30,11 @@ final class MainTabViewModel: NSObject, ObservableObject {
         self.container = container
         self.connectionManager = container.connectionManager.resolve()
         self.stationRepository = container.stationRepository.resolve()
-        // Init
+        self.locationManager = container.locationManager.resolve()
         
-        setupLocationManager()
+        self.connectionManager?.startMonitoring(completion: nil)
         
-        connectionManager?.onConnectionStatusChanged { [weak self] status in
+        self.connectionManager?.onConnectionStatusChanged { [weak self] status in
             logger.info(.init(stringLiteral: "Connectivity status: \(status)"))
             
             switch status {
@@ -47,62 +44,58 @@ final class MainTabViewModel: NSObject, ObservableObject {
                 }
             case .disconnected:
                 self?.stationRepository.loadCachedData()
+                
                 logger.warning(.init(stringLiteral: "Connectivity status: \(status).\nNo network connection"))
                 break
             @unknown default:
                 logger.warning(.init(stringLiteral: "Connectivity status: \(status).\nUnable to fetch stations. Use fallback case"))
             }
         }
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(invokeRefreshOwnLocation(_:)),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
     }
-
-    private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    
+    func assembleViewControllers() -> [UIViewController] {
+        return [
+            MapViewControllerAssembly(
+                container: self.container,
+                stationRepository: self.stationRepository
+            )
+            .assembly()
+            .withNavigationContainer()
+            .tabBarItem(TabBarItem(type: .map)),
+            
+            ListViewAssembly(
+                container: self.container,
+                stationRepository: self.stationRepository
+            )
+            .assembly()
+            .withNavigationContainer()
+            .tabBarItem(TabBarItem(type: .list))
+        ]
+    }
+    
+    @objc
+    private func invokeRefreshOwnLocation(_ notification: NSNotification) {
+        locationManager.requestOneShotLocation()
     }
 
     private func startTimer() {
+        stationRepository.fetchStations()
+        timer?.invalidate()
+        
         timer = Timer.scheduledTimer(
-            withTimeInterval: 20.0,
+            withTimeInterval: 180,
             repeats: true
         ) { [weak self] _ in
             self?.stationRepository.fetchStations()
         }
 
         RunLoop.current.add(timer!, forMode: .common)
-    }
-}
-
-extension MainTabViewModel: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            manager.startUpdatingLocation()
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .denied:
-            logger.error(.init(stringLiteral: "Error: location Authorization denied."))
-        default:
-            logger.warning(.init(stringLiteral: "Unknown case for CLLocationManager authorizationStatus"))
-        }
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-        guard let location = locations.last else { return }
-
-        logger.info(.init(stringLiteral: "User's location: \(location.coordinate.latitude),\(location.coordinate.longitude)"))
-
-        manager.stopUpdatingLocation()
-        userLocation = location
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
-        errorMessage = error.localizedDescription
-        logger.error(.init(stringLiteral: "Error: \(error.localizedDescription)"))
     }
 }

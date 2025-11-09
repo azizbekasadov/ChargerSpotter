@@ -9,9 +9,10 @@ import Foundation
 import MapKit
 
 class UniqueStation: NSObject {
+    dynamic var coordinate: CLLocationCoordinate2D
+    
     let stationId: String
     let maxPower: Int
-    let coordinate: CLLocationCoordinate2D
     let lastUpdate: Date?
     let availability: EvseAvailability
 
@@ -59,10 +60,7 @@ extension UniqueStation: MKAnnotation {
         subtitleChunks.append("\(maxPower)kW")
 
         if let lastUpdate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
-            dateFormatter.timeStyle = .short
-            let str = dateFormatter.string(from: lastUpdate)
+            let str = DateFormatter.formatter.string(from: lastUpdate)
             subtitleChunks.append("\(stationId) updated on:" + str)
         }
 
@@ -70,7 +68,7 @@ extension UniqueStation: MKAnnotation {
     }
 }
 
-extension Dictionary where Key == String, Value == [Station] {
+extension Dictionary where Key == String, Value == [EVStation] {
     func uniqueStations(
         for evseAvailability: [String: EvseAvailability]
     ) -> [UniqueStation] {

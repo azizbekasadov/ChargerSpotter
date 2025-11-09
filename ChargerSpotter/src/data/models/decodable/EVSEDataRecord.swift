@@ -28,10 +28,7 @@ struct EVSEDataRecord: Decodable {
         stationId = try container.decode(String.self, forKey: .stationId)
         evseId = try container.decode(String.self, forKey: .evseId)
         lastUpdate = try container.decodeIfPresent(Date.self, forKey: .lastUpdate)
-
-        let gc = try container.decode(GeoCoordinates.self, forKey: .coordinates)
-        coordinates = gc.locationCoordinate2D
-
+        coordinates = try container.decode(GeoCoordinates.self, forKey: .coordinates).locationCoordinate2D
         facilities = try container.decode([ChargingFacility].self, forKey: .facilities)
     }
 }

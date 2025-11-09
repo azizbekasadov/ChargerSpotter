@@ -19,6 +19,13 @@ final class MapViewController: BaseViewController {
         return mapView
     }()
 
+    private lazy var updateDateLabel: SyncDateLabel = {
+        let label = SyncDateLabel()
+        label.alpha = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let viewModel: MapViewModel
     
     init(viewModel: MapViewModel) {
@@ -32,18 +39,39 @@ final class MapViewController: BaseViewController {
     }
 
     override func setupBindings() {
-        viewModel.handleLoadState = handleLoadState
-        viewModel.updateOwnLocation = updateOwnLocation(_:)
+        viewModel.handleLoadState = { [weak self] state in
+            self?.handleLoadState(state: state)
+        }
+        
+        viewModel.updateOwnLocation = { [weak self] location in
+            self?.updateOwnLocation(location)
+        }
     }
     
     override func setupUI() {
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "StationCluster")
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "StationAnnotation")
+        
         view.addSubview(mapView)
+        view.addSubview(updateDateLabel)
 
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        ])
+        view.bringSubviewToFront(updateDateLabel)
+        
+        NSLayoutConstraint.activate(
+            [
+                mapView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                
+                updateDateLabel.bottomAnchor.constraint(
+                    equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
+                    constant: -24
+                ),
+                updateDateLabel.centerXAnchor.constraint(
+                    equalTo: self.view.centerXAnchor
+                ),
+            ]
+        )
         
         if #available(iOS 26, *) {
             mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -54,13 +82,33 @@ final class MapViewController: BaseViewController {
 
     private func handleLoadState(state: StationRepository.LoadState) {
         switch state {
-        case .loaded(let stations):
+        case let .loaded(stations, lastSyncDate):
             logger.info(.init(stringLiteral: "Number of stations: \(stations.count)"))
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(stations)
+            
+            updateDateLabel.text = lastSyncDate.formatted(
+                .dateTime
+                .weekday(.wide)
+                .day(.twoDigits)
+                .hour()
+                .minute()
+                .second()
+            )
+            
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 1
+            }
         case .failed:
             logger.error(.init(stringLiteral: "Failed to load static data"))
-        default: break
+            
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 0
+            }
+        default:
+            UIView.animate(withDuration: 0.25) {
+                self.updateDateLabel.alpha = 0
+            }
         }
     }
 
@@ -68,8 +116,8 @@ final class MapViewController: BaseViewController {
         // Center map on user's location (1km radius) ~1km
         let region = MKCoordinateRegion(
             center: location.coordinate,
-            latitudinalMeters: 2000,
-            longitudinalMeters: 2000
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
         )
 
         mapView.setRegion(region, animated: true)
@@ -81,29 +129,59 @@ extension MapViewController: MKMapViewDelegate {
         _ mapView: MKMapView,
         viewFor annotation: MKAnnotation
     ) -> MKAnnotationView? {
-        guard let station = annotation as? UniqueStation else { return nil }
-
-        let identifier = "StationAnnotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(
-            withIdentifier: identifier
-        ) as? MKMarkerAnnotationView
-
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(
-                annotation: station,
-                reuseIdentifier: identifier
-            )
-            annotationView?.canShowCallout = true
-
-            let infoButton = UIButton(type: .detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = infoButton
-        } else {
-            annotationView?.annotation = station
+        if annotation is MKUserLocation { return nil }
+        
+        // Clustering
+        if let cluster = annotation as? MKClusterAnnotation {
+            let id = "StationCluster"
+            let view = mapView.dequeueReusableAnnotationView(withIdentifier: id, for: cluster) as! MKMarkerAnnotationView
+            
+            view.canShowCallout = true
+            view.animatesWhenAdded = true
+            view.subtitleVisibility = .adaptive
+            view.clusteringIdentifier = nil
+            view.displayPriority = .defaultHigh
+            
+            let count = cluster.memberAnnotations.count
+            view.glyphText = "\(count)"
+            view.markerTintColor = dominantTintColor(for: cluster)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return view
         }
-
-        annotationView?.glyphImage = UIImage(systemName: "ev.charger")
-        annotationView?.markerTintColor = station.availability.tintColor
-
-        return annotationView
+        
+        guard let station = annotation as? UniqueStation else { return nil }
+        
+        let id = "StationAnnotation"
+        let view = (mapView.dequeueReusableAnnotationView(withIdentifier: id) as? MKMarkerAnnotationView)
+        ?? MKMarkerAnnotationView(annotation: station, reuseIdentifier: id)
+        
+        view.annotation = station
+        view.canShowCallout = true
+        view.glyphImage = UIImage(systemName: "ev.charger")
+        view.markerTintColor = station.availability.tintColor
+        
+        view.clusteringIdentifier = "station"
+        view.displayPriority = .defaultLow
+        
+        if view.rightCalloutAccessoryView == nil {
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        return view
+    }
+    
+    private func dominantTintColor(for cluster: MKClusterAnnotation) -> UIColor {
+        var histogram: [UIColor:Int] = [:] // dynamic lookup
+        
+        for case let s as UniqueStation in cluster.memberAnnotations {
+            let c = s.availability.tintColor
+            histogram[c, default: 0] += 1
+        }
+        
+        if let (color, _) = histogram.max(by: { $0.value < $1.value }) {
+            return color
+        }
+        
+        return .systemGray
     }
 }

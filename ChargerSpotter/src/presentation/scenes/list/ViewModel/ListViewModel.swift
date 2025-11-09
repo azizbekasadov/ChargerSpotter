@@ -12,26 +12,23 @@ import CoreLocation
 final class ListViewModel: ObservableObject {
     @Published var stations: [UniqueStation] = []
     
-    private let stationRepository: StationRepository
-    
-    private let locationPublisher: Published<CLLocation?>.Publisher
+    private let stationsStateLoader: Published<StationRepository.LoadState>.Publisher
+    private let locationPublisher: AnyPublisher<CLLocation, Never>
     
     var cancellables = Set<AnyCancellable>()
     
     init(
-        stationRepository: StationRepository,
-        cancellables: Set<AnyCancellable> = Set<AnyCancellable>(),
-        locationPublisher: Published<CLLocation?>.Publisher
+        stationsStateLoader: Published<StationRepository.LoadState>.Publisher,
+        locationPublisher: AnyPublisher<CLLocation, Never>
     ) {
-        self.stationRepository = stationRepository
-        self.cancellables = cancellables
+        self.stationsStateLoader = stationsStateLoader
         self.locationPublisher = locationPublisher
         
         setupBindings()
     }
     
     private func setupBindings() {
-        stationRepository.$loadState
+        stationsStateLoader
             .combineLatest(locationPublisher.compactMap { $0 })
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (state, location) in
@@ -45,7 +42,7 @@ final class ListViewModel: ObservableObject {
         location: CLLocation
     ) {
         switch state {
-        case .loaded(let stations):
+        case let .loaded(stations, _):
             logger.info(.init(stringLiteral: NSStringFromClass(Self.self) + "number of stations: \(stations.count); location: \(location)"))
             
             let filteredStations = stations.filter { station in
