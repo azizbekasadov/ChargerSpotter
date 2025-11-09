@@ -31,7 +31,7 @@ final class StationRepository {
         $loadState
             .compactMap {
                 if case let .loaded(stations, date) = $0 {
-                    return (stations, Date())
+                    return (stations, date)
                 }
                 
                 return nil

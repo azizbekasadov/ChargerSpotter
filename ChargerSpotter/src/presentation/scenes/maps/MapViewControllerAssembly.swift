@@ -20,7 +20,7 @@ final class MapViewControllerAssembly: Assembliable {
         stationRepository: StationRepository
     ) {
         self.container = container
-        self.stationRepository = stationRepository // we make MainTabViewModel as the main source of truth
+        self.stationRepository = stationRepository
     }
     
     func assembly() -> MapViewController {

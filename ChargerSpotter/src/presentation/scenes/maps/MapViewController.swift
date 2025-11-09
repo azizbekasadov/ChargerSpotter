@@ -116,8 +116,8 @@ final class MapViewController: BaseViewController {
         // Center map on user's location (1km radius) ~1km
         let region = MKCoordinateRegion(
             center: location.coordinate,
-            latitudinalMeters: 2000,
-            longitudinalMeters: 2000
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
         )
 
         mapView.setRegion(region, animated: true)

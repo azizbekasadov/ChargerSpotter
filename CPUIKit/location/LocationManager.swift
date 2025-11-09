@@ -64,17 +64,22 @@ public final class LocationManager: NSObject, ObservableObject, LocationManagerP
     }
 
     private func handleAuthorizationAndStart(_ shouldRequestOnce: Bool) {
-        guard CLLocationManager.locationServicesEnabled() else {
-            errorMessage = "Location Services are disabled."
-            logger.error("Location Services disabled.")
-            return
-        }
-
         switch locationManager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
             start(shouldRequestOnce)
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            Task.detached {
+                let servicesEnabled = CLLocationManager.locationServicesEnabled()
+                
+                await MainActor.run {
+                    if servicesEnabled {
+                        self.locationManager.requestWhenInUseAuthorization()
+                    } else {
+                        self.errorMessage = "Location Services are disabled."
+                        logger.error("Location Services disabled.")
+                    }
+                }
+            }
         case .denied, .restricted:
             errorMessage = "Location permission denied. Please enable it in Settings."
             logger.error("Location authorization denied or restricted.")
@@ -84,6 +89,7 @@ public final class LocationManager: NSObject, ObservableObject, LocationManagerP
         }
     }
 
+    @MainActor
     private func start(_ shouldRequestOnce: Bool) {
         if shouldRequestOnce {
             locationManager.requestLocation()
@@ -98,23 +104,25 @@ public final class LocationManager: NSObject, ObservableObject, LocationManagerP
 extension LocationManager: CLLocationManagerDelegate {
     
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            if wantsContinuousUpdates {
-                manager.startUpdatingLocation()
-                logger.info(.init(stringLiteral: "Requesting user location with updates"))
-            } else {
-                manager.requestLocation()
-                logger.info(.init(stringLiteral: "Requesting user location with updates"))
+        Task { @MainActor in
+            switch manager.authorizationStatus {
+            case .authorizedWhenInUse, .authorizedAlways:
+                if wantsContinuousUpdates {
+                    manager.startUpdatingLocation()
+                    logger.info(.init(stringLiteral: "Requesting user location with updates"))
+                } else {
+                    manager.requestLocation()
+                    logger.info(.init(stringLiteral: "Requesting user location with updates"))
+                }
+            case .notDetermined:
+                manager.requestWhenInUseAuthorization()
+            case .denied, .restricted:
+                errorMessage = "Location permission denied. Please enable it in Settings."
+                logger.error("Authorization denied/restricted after change.")
+            @unknown default:
+                errorMessage = "Unknown authorization state."
+                logger.warning("Unknown authorization state after change.")
             }
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .denied, .restricted:
-            errorMessage = "Location permission denied. Please enable it in Settings."
-            logger.error("Authorization denied/restricted after change.")
-        @unknown default:
-            errorMessage = "Unknown authorization state."
-            logger.warning("Unknown authorization state after change.")
         }
     }
 

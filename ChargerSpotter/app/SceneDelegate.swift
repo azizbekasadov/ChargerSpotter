@@ -8,8 +8,11 @@
 import UIKit
 import CPUIKit
 import Factory
+import CPUtilsKit
+import CPNetworkKit
+import CPStorageKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private let container = Container()
     private var appCoordinator: Coordinator!
@@ -31,13 +34,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             container: self.container
         )
         self.appCoordinator.start()
+        
+        Task {
+            await setupDependencies()
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-//        storageService.context.save() // use DI
-//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        // TODO: Clean it up
+        container.storageService.resolve().write()
     }
-
-
+    
+    // MARK: - Composition Root
+    
+    private func setupDependencies() async {
+        container.storageService.register { @MainActor in
+            CPCoreDataStorageService.shared
+        }
+        container.locationManager.register { @MainActor in
+            LocationManager.shared
+        }
+        container.networkService.register {
+            ClientAPIService()
+        }
+    }
 }
 

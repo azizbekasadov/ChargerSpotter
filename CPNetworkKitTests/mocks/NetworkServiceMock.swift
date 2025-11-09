@@ -10,6 +10,10 @@ import Foundation
 @testable import CPNetworkKit
 
 class NetworkServiceMock: NetworkService {
+    func fetch<T>(from url: URL?) async throws -> T where T : Decodable {
+        
+    }
+    
     var countFetchCalled: Int = 0
     var countFetchAsyncCalled: Int = 0
     

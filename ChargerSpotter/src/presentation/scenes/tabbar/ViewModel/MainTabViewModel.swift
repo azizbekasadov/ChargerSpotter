@@ -44,12 +44,20 @@ final class MainTabViewModel: NSObject, ObservableObject {
                 }
             case .disconnected:
                 self?.stationRepository.loadCachedData()
+                
                 logger.warning(.init(stringLiteral: "Connectivity status: \(status).\nNo network connection"))
                 break
             @unknown default:
                 logger.warning(.init(stringLiteral: "Connectivity status: \(status).\nUnable to fetch stations. Use fallback case"))
             }
         }
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(invokeRefreshOwnLocation(_:)),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
     }
     
     func assembleViewControllers() -> [UIViewController] {
@@ -70,6 +78,11 @@ final class MainTabViewModel: NSObject, ObservableObject {
             .withNavigationContainer()
             .tabBarItem(TabBarItem(type: .list))
         ]
+    }
+    
+    @objc
+    private func invokeRefreshOwnLocation(_ notification: NSNotification) {
+        locationManager.requestOneShotLocation()
     }
 
     private func startTimer() {

@@ -5,6 +5,7 @@
 //  Created by Azizbek Asadov on 28.10.2025.
 //
 
+import UIKit
 import Combine
 import Network
 import Foundation
@@ -12,6 +13,7 @@ import CPUtilsKit
 import CoreLocation
 
 final class MapViewModel: NSObject, ObservableObject {
+    
     private let stationsStateLoader: Published<StationRepository.LoadState>.Publisher
     private let locationPublisher: AnyPublisher<CLLocation, Never>
     private var cancellables = Set<AnyCancellable>()
@@ -36,6 +38,8 @@ final class MapViewModel: NSObject, ObservableObject {
             .store(in: &cancellables)
 
         self.locationPublisher
+            .removeDuplicates()
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] userLocation in
@@ -43,6 +47,4 @@ final class MapViewModel: NSObject, ObservableObject {
             })
             .store(in: &cancellables)
     }
-    
-    
 }
